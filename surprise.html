@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no"
+    />
+    <title>Surprise</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Zeyada&display=swap"
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="paper heart"></div>
+
+    <div class="paper image">
+      <p>A look so tender,</p>
+      <p>so pure.</p>
+      <img src="images/1.png" />
+    </div>
+
+    <div class="paper image">
+      <p>Eyes like <br> lightning,</p>
+      <p>strong enough <br />to shake the world.</p>
+      <img src="images/2.png" />
+    </div>
+
+    <div class="paper image">
+      <p>Painting emotions</p>
+      <p>with every touch.</p>
+      <img src="images/3.png" />
+    </div>
+
+    <div class="paper blue">
+      <p class="p1">You have the coolest</p>
+      <p class="p2">energy ✨</p>
+    </div>
+
+    <div class="paper">
+      <p class="p1">Good Morning! May your day</p>
+      <p class="p1">be as bright as your smile. 😊</p>
+    </div>
+
+    <div class="paper">
+      <p class="p1">Drag the papers to move! 😉</p>
+    </div>
+
+    <a href="smile.html" class="smile-btn" id="smileBtn">Smile 😊</a>
+
+    <!-- Background music -->
+    <audio id="bgMusic" loop preload="auto">
+      <source src="audio/Yiruma - River Flows in You.mp3" type="audio/mpeg" />
+    </audio>
+
+    <button
+      class="music-btn"
+      id="musicBtn"
+      onclick="toggleMusic()"
+      title="Toggle music"
+    >
+      🎵
+    </button>
+
+    <script src="./script.js"></script>
+    <script>
+      const music = document.getElementById("bgMusic");
+      const musicBtn = document.getElementById("musicBtn");
+      let musicPlaying = false;
+
+      // Fade in effect
+      function fadeIn(audio, duration) {
+        audio.volume = 0;
+        audio
+          .play()
+          .then(() => {
+            musicPlaying = true;
+            musicBtn.textContent = "🎵";
+            musicBtn.classList.add("playing");
+            const step = 0.05;
+            const interval = duration / (1 / step);
+            const fade = setInterval(() => {
+              if (audio.volume < 0.95) {
+                audio.volume = Math.min(1, audio.volume + step);
+              } else {
+                audio.volume = 1;
+                clearInterval(fade);
+              }
+            }, interval);
+          })
+          .catch(() => {
+            // Autoplay blocked — wait for user click
+            musicBtn.textContent = "🔇";
+            musicBtn.classList.remove("playing");
+          });
+      }
+
+      // Try autoplay on load (works if coming from intro page click)
+      fadeIn(music, 2000);
+
+      function toggleMusic() {
+        if (musicPlaying) {
+          music.pause();
+          musicPlaying = false;
+          musicBtn.textContent = "🔇";
+          musicBtn.classList.remove("playing");
+        } else {
+          fadeIn(music, 1000);
+        }
+      }
+    </script>
+  </body>
+</html>

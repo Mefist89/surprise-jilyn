@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no"
+    />
+    <title>Morning Gift ✨</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Zeyada&display=swap"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: radial-gradient(
+          ellipse at 30% 20%,
+          #1a0533 0%,
+          #0d0015 50%,
+          #000 100%
+        );
+        font-family: "Outfit", sans-serif;
+        overflow: hidden;
+        color: #fff;
+      }
+
+      /* Animated spotlight beams */
+      body::before,
+      body::after {
+        content: "";
+        position: fixed;
+        width: 300px;
+        height: 600px;
+        border-radius: 50%;
+        filter: blur(80px);
+        opacity: 0.25;
+        pointer-events: none;
+        animation: spotlightDrift 8s ease-in-out infinite alternate;
+      }
+
+      body::before {
+        background: #7c3aed;
+        top: -100px;
+        left: -50px;
+      }
+
+      body::after {
+        background: #f59e0b;
+        bottom: -100px;
+        right: -50px;
+        animation-delay: -4s;
+      }
+
+      @keyframes spotlightDrift {
+        0% {
+          transform: translate(0, 0) scale(1);
+        }
+        100% {
+          transform: translate(60px, 40px) scale(1.3);
+        }
+      }
+
+      /* Main card */
+      .intro-card {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+        padding: 48px 40px 40px;
+        max-width: 420px;
+        width: 90%;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 28px;
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        box-shadow:
+          0 8px 32px rgba(0, 0, 0, 0.5),
+          inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        animation: cardAppear 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+      }
+
+      @keyframes cardAppear {
+        from {
+          opacity: 0;
+          transform: translateY(40px) scale(0.95);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      /* Subtitle badge */
+      .badge {
+        display: inline-block;
+        padding: 6px 18px;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        color: #f59e0b;
+        border: 1px solid rgba(245, 158, 11, 0.35);
+        border-radius: 100px;
+        background: rgba(245, 158, 11, 0.08);
+        animation: cardAppear 0.8s 0.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+      }
+
+      /* Title */
+      .title {
+        font-size: 36px;
+        font-weight: 900;
+        text-align: center;
+        line-height: 1.15;
+        background: linear-gradient(135deg, #fff 0%, #c4b5fd 50%, #f59e0b 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: cardAppear 0.8s 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+      }
+
+      /* Image container */
+      .image-wrapper {
+        position: relative;
+        width: 240px;
+        height: 240px;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow:
+          0 4px 20px rgba(124, 58, 237, 0.3),
+          0 0 0 2px rgba(255, 255, 255, 0.08);
+        animation: cardAppear 0.8s 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+      }
+
+      .image-wrapper::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 20px;
+        background: linear-gradient(
+          180deg,
+          transparent 50%,
+          rgba(13, 0, 21, 0.6) 100%
+        );
+        pointer-events: none;
+      }
+
+      .image-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.5s ease;
+      }
+
+      .intro-card:hover .image-wrapper img {
+        transform: scale(1.05);
+      }
+
+      /* Start button */
+      .start-btn {
+        position: relative;
+        width: 100%;
+        padding: 16px 0;
+        font-family: "Outfit", sans-serif;
+        font-size: 18px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        color: #fff;
+        background: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%);
+        border: none;
+        border-radius: 14px;
+        cursor: pointer;
+        overflow: hidden;
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease;
+        box-shadow: 0 4px 16px rgba(124, 58, 237, 0.4);
+        animation: cardAppear 0.8s 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+      }
+
+      .start-btn::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.15) 0%,
+          transparent 60%
+        );
+        border-radius: 14px;
+      }
+
+      .start-btn:hover {
+        transform: translateY(-2px) scale(1.02);
+        box-shadow: 0 6px 24px rgba(124, 58, 237, 0.55);
+      }
+
+      .start-btn:active {
+        transform: translateY(0) scale(0.98);
+      }
+
+      .start-btn:disabled {
+        cursor: not-allowed;
+        opacity: 0.85;
+      }
+
+      /* Countdown overlay */
+      .countdown {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 100;
+        background: rgba(0, 0, 0, 0.85);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .countdown.active {
+        display: flex;
+      }
+
+      .countdown-number {
+        font-size: 140px;
+        font-weight: 900;
+        background: linear-gradient(135deg, #f59e0b 0%, #7c3aed 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: countPulse 1s ease-in-out;
+        line-height: 1;
+      }
+
+      .countdown-label {
+        font-size: 18px;
+        font-weight: 400;
+        color: rgba(255, 255, 255, 0.5);
+        letter-spacing: 4px;
+        text-transform: uppercase;
+      }
+
+      @keyframes countPulse {
+        0% {
+          transform: scale(0.3);
+          opacity: 0;
+        }
+        50% {
+          transform: scale(1.15);
+          opacity: 1;
+        }
+        100% {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+
+      /* Sparkle particles */
+      .sparkles {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+        overflow: hidden;
+      }
+
+      .sparkle {
+        position: absolute;
+        width: 3px;
+        height: 3px;
+        background: #fff;
+        border-radius: 50%;
+        opacity: 0;
+        animation: sparkleFloat linear infinite;
+      }
+
+      @keyframes sparkleFloat {
+        0% {
+          opacity: 0;
+          transform: translateY(100vh) scale(0);
+        }
+        10% {
+          opacity: 1;
+        }
+        90% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
+          transform: translateY(-20px) scale(1);
+        }
+      }
+
+      /* Responsive */
+      @media (max-width: 480px) {
+        .intro-card {
+          padding: 32px 24px 28px;
+          gap: 18px;
+        }
+
+        .title {
+          font-size: 28px;
+        }
+
+        .image-wrapper {
+          width: 190px;
+          height: 190px;
+        }
+
+        .countdown-number {
+          font-size: 100px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Floating sparkles -->
+    <div class="sparkles" id="sparkles"></div>
+
+    <!-- Main intro card -->
+    <div class="intro-card">
+      <span class="badge"> Morning Gift For Jilyn ✨</span>
+      <h1 class="title">Morning Gift<br />Presents</h1>
+      <div class="image-wrapper">
+        <img
+          src="images/surpriseinside.gif"
+          alt="Jim Carrey"
+          draggable="false"
+        />
+      </div>
+      <button class="start-btn" id="startBtn" onclick="startCountdown()">
+        ▶ START
+      </button>
+    </div>
+
+    <!-- Countdown overlay -->
+    <div class="countdown" id="countdown">
+      <div class="countdown-number" id="countNum">5</div>
+      <div class="countdown-label">get ready...</div>
+    </div>
+
+    <script>
+      // Generate sparkle particles
+      (function createSparkles() {
+        const container = document.getElementById("sparkles");
+        for (let i = 0; i < 30; i++) {
+          const s = document.createElement("div");
+          s.className = "sparkle";
+          s.style.left = Math.random() * 100 + "%";
+          s.style.animationDuration = 4 + Math.random() * 6 + "s";
+          s.style.animationDelay = Math.random() * 6 + "s";
+          s.style.width = s.style.height = 1 + Math.random() * 3 + "px";
+          container.appendChild(s);
+        }
+      })();
+
+      function startCountdown() {
+        const btn = document.getElementById("startBtn");
+        const overlay = document.getElementById("countdown");
+        const numEl = document.getElementById("countNum");
+
+        btn.disabled = true;
+        btn.textContent = "⏳ Loading...";
+        overlay.classList.add("active");
+
+        let count = 5;
+        numEl.textContent = count;
+        numEl.style.animation = "none";
+        void numEl.offsetWidth;
+        numEl.style.animation = "";
+
+        const timer = setInterval(() => {
+          count--;
+          if (count <= 0) {
+            clearInterval(timer);
+            window.location.href = "surprise.html";
+            return;
+          }
+          numEl.textContent = count;
+          // Re-trigger pulse animation
+          numEl.style.animation = "none";
+          void numEl.offsetWidth;
+          numEl.style.animation = "";
+        }, 1000);
+      }
+    </script>
+  </body>
+</html>

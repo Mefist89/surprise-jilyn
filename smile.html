@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Smile! 😊</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Zeyada&display=swap">
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(ellipse at 50% 40%, #1a0a2e 0%, #0d0015 60%, #000 100%);
+      font-family: 'Outfit', sans-serif;
+      overflow: hidden;
+      color: #fff;
+    }
+
+    /* Floating hearts */
+    .hearts {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .float-heart {
+      position: absolute;
+      bottom: -40px;
+      font-size: 24px;
+      opacity: 0;
+      animation: floatUp linear infinite;
+    }
+
+    @keyframes floatUp {
+      0%   { opacity: 0; transform: translateY(0) scale(0.5) rotate(0deg); }
+      10%  { opacity: 0.8; }
+      90%  { opacity: 0.6; }
+      100% { opacity: 0; transform: translateY(-100vh) scale(1.2) rotate(20deg); }
+    }
+
+    /* Card */
+    .smile-card {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 28px;
+      padding: 50px 44px;
+      max-width: 460px;
+      width: 90%;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 28px;
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      animation: cardIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+      text-align: center;
+    }
+
+    @keyframes cardIn {
+      from { opacity: 0; transform: translateY(40px) scale(0.95); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    /* Big emoji */
+    .big-emoji {
+      font-size: 80px;
+      animation: bounce 2s ease-in-out infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50%      { transform: translateY(-12px); }
+    }
+
+    /* Title */
+    .smile-title {
+      font-family: 'Zeyada', cursive;
+      font-size: 42px;
+      line-height: 1.3;
+      background: linear-gradient(135deg, #f9a8d4 0%, #fbbf24 50%, #f9a8d4 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: cardIn 0.8s 0.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    /* Message */
+    .smile-message {
+      font-size: 18px;
+      line-height: 1.7;
+      color: rgba(255, 255, 255, 0.75);
+      animation: cardIn 0.8s 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    .smile-message strong {
+      color: #fbbf24;
+    }
+
+    /* Camera icon */
+    .camera-icon {
+      font-size: 48px;
+      animation: cardIn 0.8s 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-block;
+      padding: 14px 36px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+      text-decoration: none;
+      background: linear-gradient(135deg, #ec4899 0%, #f59e0b 100%);
+      border-radius: 14px;
+      box-shadow: 0 4px 16px rgba(236, 72, 153, 0.4);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      animation: cardIn 0.8s 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    .back-link:hover {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 6px 24px rgba(236, 72, 153, 0.55);
+    }
+
+    .back-link:active {
+      transform: translateY(0) scale(0.98);
+    }
+
+    @media (max-width: 480px) {
+      .smile-card {
+        padding: 36px 24px;
+        gap: 22px;
+      }
+      .smile-title {
+        font-size: 32px;
+      }
+      .smile-message {
+        font-size: 16px;
+      }
+      .big-emoji {
+        font-size: 60px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating hearts background -->
+  <div class="hearts" id="hearts"></div>
+
+  <div class="smile-card">
+    <div class="big-emoji">😊</div>
+    <h1 class="smile-title">If you liked the surprise...</h1>
+    <p class="smile-message">
+      I'm waiting for your photo with a <strong>smile</strong> :)<br>
+      Waiting for your reaction as a photo! 📸
+    </p>
+    <div class="camera-icon">📸</div>
+    <a href="surprise.html" class="back-link">← Back to surprise</a>
+  </div>
+
+  <script>
+    // Generate floating hearts
+    (function createHearts() {
+      const container = document.getElementById('hearts');
+      const emojis = ['❤️', '💛', '💖', '😊', '✨', '💕'];
+      for (let i = 0; i < 20; i++) {
+        const h = document.createElement('div');
+        h.className = 'float-heart';
+        h.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+        h.style.left = Math.random() * 100 + '%';
+        h.style.animationDuration = (5 + Math.random() * 7) + 's';
+        h.style.animationDelay = (Math.random() * 8) + 's';
+        h.style.fontSize = (16 + Math.random() * 20) + 'px';
+        container.appendChild(h);
+      }
+    })();
+  </script>
+
+</body>
+</html>
